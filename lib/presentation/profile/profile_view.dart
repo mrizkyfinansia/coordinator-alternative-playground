@@ -11,6 +11,7 @@ class ProfileView extends GetView<ProfileController> {
         body: controller.isLoading.value
         ? Center(child: Text("loading"))
         : Column(
+          mainAxisAlignment: MainAxisAlignment.center,
             children: [
               header(),
               body(),
