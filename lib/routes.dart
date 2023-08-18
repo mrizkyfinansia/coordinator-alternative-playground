@@ -11,10 +11,6 @@ class Apppages {
 
   static final routes = [
     GetPage(
-      name: "/loading", 
-      page: () => const LoadingView()
-    ),
-    GetPage(
       name: "/profile",
       page: () => const ProfileView(),
     ),

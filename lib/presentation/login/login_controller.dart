@@ -11,6 +11,7 @@ class LoginController extends GetxController {
   void loginMerchant() async {
     isLoading(true);
     await LoginUsecase().call(role: "merchant");
+    // navigasi masih hardcode
     await logincoor.move("merchant");
     isLoading(false);
   }
@@ -18,6 +19,7 @@ class LoginController extends GetxController {
   void loginAgent() async {
     isLoading(true);
     await LoginUsecase().call(role: "agent");
+    // navigasi masih hardcode
     await logincoor.move("agent");
     isLoading(false);
   }
