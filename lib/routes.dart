@@ -1,29 +1,35 @@
+import 'package:coordinator/presentation/kredit/kredit_view.dart';
+import 'package:coordinator/presentation/loading.dart';
 import 'package:coordinator/presentation/login/login_binding.dart';
 import 'package:coordinator/presentation/login/login_view.dart';
+import 'package:coordinator/presentation/pengajuan/pengajuan_view.dart';
 import 'package:coordinator/presentation/profile/profile_view.dart';
 import 'package:get/get.dart';
-
-import 'presentation/profile/binding/profile_agent_binding.dart';
-import 'presentation/profile/binding/profile_merchant_binding.dart';
 
 class Apppages {
   Apppages._();
 
   static final routes = [
     GetPage(
-      name: "/profile-merchant",
-      page: () => const ProfileView(),
-      binding: ProfileMerchantBinding(),
+      name: "/loading", 
+      page: () => const LoadingView()
     ),
     GetPage(
-      name: "/profile-agent",
+      name: "/profile",
       page: () => const ProfileView(),
-      binding: ProfileAgentBinding(),
+    ),
+    GetPage(
+      name: "/pengajuan",
+      page: () => const PengajuanView(),
+    ),
+    GetPage(
+      name: "/kredit",
+      page: () => const KreditView(),
     ),
     GetPage(
       name: "/login",
       page: () => const LoginView(),
-      binding: Loginbinding(),
+      binding: Loginbinding()
     ),
   ];
 }

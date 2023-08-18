@@ -7,12 +7,16 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          header(),
-          body(),
-        ],
+    return Obx(() => Scaffold(
+        body: controller.isLoading.value
+        ? Center(child: Text("loading"))
+        : Column(
+            children: [
+              header(),
+              body(),
+              button(),
+            ],
+          )
       ),
     );
   }
@@ -20,8 +24,10 @@ class ProfileView extends GetView<ProfileController> {
   Stack header() {
     return Stack(
       children: [
-        _agentProfileTitleWidget(setVisible: controller.profile.role == "agent"),
-        _merchantProfileTitleWidget(setVisible: controller.profile.role == "merchant")
+        _agentProfileTitleWidget(
+            setVisible: controller.profile.role == "agent"),
+        _merchantProfileTitleWidget(
+            setVisible: controller.profile.role == "merchant")
       ],
     );
   }
@@ -30,64 +36,101 @@ class ProfileView extends GetView<ProfileController> {
     return Stack(
       children: [
         _agentBiodataWidget(setVisible: controller.profile.role == "agent"),
-        _merchantBiodataWidget(setVisible: controller.profile.role == "merchant"),
+        _merchantBiodataWidget(
+            setVisible: controller.profile.role == "merchant"),
+      ],
+    );
+  }
+
+  Stack button() {
+    return Stack(
+      children: [
+        _agentButton(setVisible: controller.profile.role == "agent"),
+        _merchantButton(setVisible: controller.profile.role == "merchant"),
       ],
     );
   }
 
   Widget _merchantProfileTitleWidget({required bool setVisible}) {
-    return setVisible
-    ? const Text("Profile Merchant")
-    : const SizedBox();
+    return setVisible ? const Text("Profile Merchant") : const SizedBox();
   }
 
   Widget _agentProfileTitleWidget({required bool setVisible}) {
-    return setVisible
-    ? const Text("Profile Agent")
-    : const SizedBox();
+    return setVisible ? const Text("Profile Agent") : const SizedBox();
   }
 
-
   Widget _agentBiodataWidget({required bool setVisible}) {
-    return setVisible 
-    ? SizedBox(
-        child: Column(
-          children: [
-            Row(
-              children: [const Text("Nama: "), Text(controller.profile.name)],
+    return setVisible
+        ? SizedBox(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    const Text("Nama: "),
+                    Text(controller.profile.name)
+                  ],
+                ),
+                Row(
+                  children: [const Text("Ktp: "), Text(controller.profile.ktp)],
+                ),
+                Row(
+                  children: [
+                    const Text("email: "),
+                    Text(controller.profile.email)
+                  ],
+                )
+              ],
             ),
-            Row(
-              children: [const Text("Ktp: "), Text(controller.profile.ktp)],
-            ),
-            Row(
-              children: [const Text("email: "), Text(controller.profile.email)],
-            )
-          ],
-        ),
-      )
-    : const SizedBox();
+          )
+        : const SizedBox();
   }
 
   Widget _merchantBiodataWidget({required bool setVisible}) {
     return setVisible
-    ? SizedBox(
-        child: Column(
-          children: [
-            Row(
-              children: [const Text("Nama"), Text(controller.profile.name)],
+        ? SizedBox(
+            child: Column(
+              children: [
+                Row(
+                  children: [const Text("Nama"), Text(controller.profile.name)],
+                ),
+                Row(
+                  children: [const Text("Ktp"), Text(controller.profile.ktp)],
+                ),
+                Row(
+                  children: [
+                    const Text("nomor hp"),
+                    Text(controller.profile.noHp)
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text("email"),
+                    Text(controller.profile.email)
+                  ],
+                )
+              ],
             ),
-            Row(
-              children: [const Text("Ktp"), Text(controller.profile.ktp)],
-            ),
-            Row(
-              children: [const Text("nomor hp"), Text(controller.profile.noHp)],
-            ),
-            Row(
-              children: [const Text("email"), Text(controller.profile.email)],
-            )
-          ],
-        ),
-      )
-    : const SizedBox();
+          )
+        : const SizedBox();
+  }
+
+  Widget _agentButton({required bool setVisible}) {
+    return setVisible
+        ? ElevatedButton(
+            onPressed: () {
+              controller.onTapButton();
+            },
+            child: Text("Pengajuan"))
+        : SizedBox();
+  }
+
+  Widget _merchantButton({required bool setVisible}) {
+    return setVisible
+        ? ElevatedButton(
+            onPressed: () {
+              controller.onTapButton();
+            },
+            child: Text("Kredit"))
+        : SizedBox();
   }
 }

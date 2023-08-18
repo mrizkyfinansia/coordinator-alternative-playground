@@ -7,13 +7,26 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: [
-          ElevatedButton(onPressed: (){controller.loginAgent();}, child: Text("agent")),
-          ElevatedButton(onPressed: (){controller.loginMerchant();}, child: Text("merchant")),
-        ],
-      ),
+    return Obx(() => Scaffold(
+        body: controller.isLoading.value
+        ? Center(child: Text("Loading"))
+        : Row(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  controller.loginAgent();
+                },
+                child: Text("agent")
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  controller.loginMerchant();
+                },
+                child: Text("merchant")
+              ),
+            ],
+          )
+      )
     );
   }
 }
