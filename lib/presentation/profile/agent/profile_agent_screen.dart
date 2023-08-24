@@ -38,9 +38,6 @@ class ProfileAgentScreen extends GetView<BaseProfileController> with BaseProfile
           children: [const Text("Ktp: "), Text(controller.profile.ktp)],
         ),
         Row(
-          children: [const Text("nomor hp: "), Text(controller.profile.noHp)],
-        ),
-        Row(
           children: [const Text("email: "), Text(controller.profile.email)],
         )
       ],

@@ -15,12 +15,12 @@ class ProfileMerchantScreen extends GetView<BaseProfileController> with BaseProf
     return Column(
       children: [
         _biodataWidget(),
-        _pengajuanButton()
+        _kreditButton()
       ],
     );
   }
 
-  Widget _pengajuanButton() {
+  Widget _kreditButton() {
   return ElevatedButton(
       onPressed: (){controller.onTapButton();}, 
       child: Text("Kredit"),
@@ -40,9 +40,6 @@ class ProfileMerchantScreen extends GetView<BaseProfileController> with BaseProf
         Row(
           children: [const Text("nomor hp: "), Text(controller.profile.noHp)],
         ),
-        Row(
-          children: [const Text("email: "), Text(controller.profile.email)],
-        )
       ],
     ),
   );
