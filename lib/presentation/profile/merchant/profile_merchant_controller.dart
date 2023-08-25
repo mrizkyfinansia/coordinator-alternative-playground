@@ -14,6 +14,7 @@ class ProfileMerchantController extends BaseProfileController {
   @override
   void onInit() async {
     isloading(true);
+    await Future.delayed(const Duration(seconds: 1));
     profile = await getUserMerchantUsecase(userId: "MERCHANT123");
     isloading(false);
     super.onInit();

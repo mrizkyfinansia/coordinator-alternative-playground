@@ -4,44 +4,47 @@ import 'package:coordinator/presentation/profile/merchant/profile_merchant_contr
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileMerchantScreen extends GetView<BaseProfileController> with BaseProfileScreen{
+class ProfileMerchantScreen extends GetView<BaseProfileController> with BaseProfileScreen {
   ProfileMerchantScreen({super.key});
-  
+
   @override
   ProfileMerchantController controller = Get.find<ProfileMerchantController>();
 
- @override
+  @override
   Widget body() {
     return Column(
       children: [
-        _biodataWidget(),
-        _kreditButton()
+        _biodataWidget(), 
+        _kreditButton(),
       ],
     );
   }
 
   Widget _kreditButton() {
-  return ElevatedButton(
-      onPressed: (){controller.onTapButton();}, 
+    return ElevatedButton(
+      onPressed: () {
+        controller.onTapButton();
+      },
       child: Text("Kredit"),
     );
   }
 
-  Widget _biodataWidget() =>
-  SizedBox(
-    child: Column(
-      children: [
-        Row(
-          children: [const Text("Nama: "), Text(controller.profile.name)],
+  Widget _biodataWidget() => Obx(() => controller.isloading.isFalse
+    ? SizedBox(
+        child: Column(
+          children: [
+            Row(
+              children: [const Text("Nama: "), Text(controller.profile.name)],
+            ),
+            Row(
+              children: [const Text("Ktp: "), Text(controller.profile.ktp)],
+            ),
+            Row(
+              children: [const Text("nomor hp: "), Text(controller.profile.noHp)],
+            ),
+          ],
         ),
-        Row(
-          children: [const Text("Ktp: "), Text(controller.profile.ktp)],
-        ),
-        Row(
-          children: [const Text("nomor hp: "), Text(controller.profile.noHp)],
-        ),
-      ],
-    ),
+      )
+    : const SizedBox(),
   );
-
 }

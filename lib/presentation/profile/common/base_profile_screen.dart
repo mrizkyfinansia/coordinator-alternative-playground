@@ -5,23 +5,32 @@ import 'package:get/get.dart';
 mixin BaseProfileScreen on GetView<BaseProfileController> {
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        body: controller.isloading.value
-            ? Text("Loading")
-            : Column(
-                children: [
-                  header(),
-                  body(),
-                  logoutButton(),
-                ],
-              ),
-      ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              header(),
+              body(),
+              logoutButton(),
+            ],
+          ),
+          loadingWidget(),
+        ],
+      )
     );
   }
 
+  Widget loadingWidget() {
+    return Obx(() {
+      return controller.isloading.isTrue
+        ? const CircularProgressIndicator()
+        : const SizedBox();
+    });
+  }
+
   Widget header() {
-    return Text("Profile");
+    return const Text("Profile");
   }
 
   Widget body();
@@ -29,7 +38,7 @@ mixin BaseProfileScreen on GetView<BaseProfileController> {
   Widget logoutButton() {
     return ElevatedButton(
       onPressed: (){controller.onTapLogout();},
-      child: Text("Logout"),
+      child: const Text("Logout"),
     );
   }
 }

@@ -4,43 +4,47 @@ import 'package:coordinator/presentation/profile/common/base_profile_screen.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileAgentScreen extends GetView<BaseProfileController> with BaseProfileScreen{
+class ProfileAgentScreen extends GetView<BaseProfileController> with BaseProfileScreen {
   ProfileAgentScreen({super.key});
-  
+
   @override
   ProfileAgentController controller = Get.find<ProfileAgentController>();
-  
+
   @override
   Widget body() {
     return Column(
       children: [
-        _biodataWidget(),
-        _pengajuanButton()
+        _biodataWidget(), 
+        _pengajuanButton(),
       ],
     );
   }
 
   Widget _pengajuanButton() {
-  return ElevatedButton(
-      onPressed: (){controller.onTapButton();}, 
+    return ElevatedButton(
+      onPressed: () {
+        controller.onTapButton();
+      },
       child: Text("Pengajuan"),
     );
   }
 
-  Widget _biodataWidget() =>
-  SizedBox(
-    child: Column(
-      children: [
-        Row(
-          children: [const Text("Nama: "), Text(controller.profile.name)],
+  Widget _biodataWidget() => Obx(() => controller.isloading.isFalse
+    ? SizedBox(
+        child: Column(
+          children: [
+            Row(
+              children: [const Text("Nama: "), Text(controller.profile.name)],
+            ),
+            Row(
+              children: [const Text("Ktp: "), Text(controller.profile.ktp)],
+            ),
+            Row(
+              children: [const Text("email: "), Text(controller.profile.email)],
+            ),
+          ],
         ),
-        Row(
-          children: [const Text("Ktp: "), Text(controller.profile.ktp)],
-        ),
-        Row(
-          children: [const Text("email: "), Text(controller.profile.email)],
-        )
-      ],
-    ),
+      )
+    : const SizedBox(),
   );
 }
