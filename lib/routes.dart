@@ -1,3 +1,7 @@
+import 'package:coordinator/buka_ini_bay/data_consumer/data_consumer_binding.dart';
+import 'package:coordinator/buka_ini_bay/data_consumer/data_consumer_screen.dart';
+import 'package:coordinator/buka_ini_bay/submission/submission_binding.dart';
+import 'package:coordinator/buka_ini_bay/submission/submission_screen.dart';
 import 'package:coordinator/presentation/login/login_binding.dart';
 import 'package:coordinator/presentation/login/login_view.dart';
 import 'package:coordinator/presentation/profile/agent/profile_agent_screen.dart';
@@ -25,6 +29,17 @@ class Apppages {
       name: "/login",
       page: () => const LoginView(),
       binding: Loginbinding(),
+    ),
+
+    GetPage(
+      name: "/submission",
+      page: () => const SubmissionScreen(),
+      binding: SubmissionBinding(),
+    ),
+    GetPage(
+      name: "/data-consumer",
+      page: () => const DataConsumer(),
+      binding: DataConsumerBinding(),
     ),
   ];
 }
