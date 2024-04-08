@@ -1,3 +1,4 @@
+import 'package:coordinator/flavor.dart';
 import 'package:coordinator/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
@@ -12,6 +13,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final s = MockFlavorConfig();
+    print(s.appDisplayName);
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
